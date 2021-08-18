@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //This is for the players rigidbody so we can actually move the player
-    public Rigidbody2D rigidbody2D;
+    public new Rigidbody2D rigidbody2D;
     // Start is called before the first frame update
     public void Start()
     {
@@ -17,11 +17,19 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            rigidbody2D.velocity = new Vector2(-5, 0);
+            rigidbody2D.velocity = new Vector2(-10, rigidbody2D.velocity.y);
         }
-        else if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
-            rigidbody2D.velocity = new Vector2(5, 0);
+            rigidbody2D.velocity = new Vector2(10, rigidbody2D.velocity.y);
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 7);
+        }
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        {
+            rigidbody2D.velocity = Vector2.zero;
         }
     }
 }
